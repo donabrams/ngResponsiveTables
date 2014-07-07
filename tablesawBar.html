@@ -1,0 +1,13 @@
+<div class="tablesaw-bar" globally-active-flag="activeFlag">
+	<a class="menu-button" ng-click="isShowingPopup=!isShowingPopup" >
+		<span>Choose columns</span>
+	</a>
+	<div class="dialog" ng-show="isShowingPopup">
+		<div class="checkbox-wrapper">
+			<label class="checkbox-label"><input type="checkbox" ng-model="allVisible" ng-change="setAllVisible(allVisible)">view all statz</label>
+		</div>
+		<div class="checkbox-wrapper" ng-repeat="col in cols | filter: {priority: '!persist'}">
+			<label class="checkbox-label"><input type="checkbox" ng-model="col.isVisible" ng-change="setColumnVisibility(col, col.isVisible)">{{col.name}}</label>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,23 @@
+<tablesaw-bar cols="colData" ng-if="mode === 'select'" is-column-displayed="isColumnDisplayed" set-column-displayed="setColumnDisplayed"></tablesaw-bar>
+<div class="table-wrapper-wrapper" ng-class="{'mode-scroll': mode == 'scroll'}">
+    <div class="table-wrapper">
+        <table>
+            <colgroup>
+                <col ng-repeat="col in colData track by $index" ng-class="{'sort': col.sort, 'sort-asc': col.sort === 'asc', 'sort-dsc': col.sort === 'dsc', 'persisted-{{$index}}': col.priority === 'persist', 'persisted': col.priority === 'persist'}">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th ng-repeat="col in colData track by $index" ng-if="col.isVisible" ng-click="sort(col)" ng-class="{'sort': col.sort, 'sort-asc': col.sort === 'asc', 'sort-dsc': col.sort === 'dsc', 'persisted-{{$index}}': col.priority === 'persist', 'persisted': col.priority === 'persist'}">{{col.name}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="i in numRows() track by $index">
+                    <td ng-repeat="col in colData track by col.name" ng-if="col.isVisible" ng-class="{'persisted-{{$index}}': col.priority === 'persist', 'persisted': col.priority === 'persist'}">
+                        <a ng-click="col.onClick(col.data[i])" ng-if="col.onClick">{{col.data[i]}}</a>
+                        <span ng-if="!col.onClick">{{col.data[i]}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
